@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EndlessLobster.Repository
@@ -12,9 +13,14 @@ namespace EndlessLobster.Repository
 			return _customerLobsters;
 		}
 
-		public string GetCustomerLobster(string id)
+		public string GetCustomerLobster(int id)
 		{
-			return _customerLobsters.FirstOrDefault(x => x == id);
+			var search = $"lobster {id}";
+			var lobster = _customerLobsters.FirstOrDefault(x => x == search);
+
+			if (lobster == null) throw new Exception($"Id {id} does not exist.");
+
+			return lobster;
 		}
 
 		public void SaveCustomerLobster(string lobster)

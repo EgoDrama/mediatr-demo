@@ -49,7 +49,7 @@ namespace EndlessLobster.Api.Controllers
 		[HttpGet("{id}")]
 		public ActionResult<string> Get(int id)
 		{
-			return _customerRepository.GetCustomerLobster("lobster 1");
+			return _customerRepository.GetCustomerLobster(id);
 		}
 
 		// POST api/lobsters
