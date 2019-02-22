@@ -2,6 +2,7 @@
 using EndlessLobster.Domain;
 using EndlessLobster.Domain.Services;
 using EndlessLobster.Repository;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,8 +32,8 @@ namespace EndlessLobster.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
 			IntegrateSimpleInjector(services);
+			services.AddMediatR();
 		}
 
 		private void IntegrateSimpleInjector(IServiceCollection services)
@@ -79,7 +80,7 @@ namespace EndlessLobster.Api
 		}
 	}
 
-	public static class ContainerExtention
+	public static class ContainerExtension
 	{
 		public static void RegisterSimilarTo<T>(this Container container, string theNamespace, string matchEnd)
 		{
