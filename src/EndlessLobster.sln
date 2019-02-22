@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessLobster.Web", "EndlessLobster.Web\EndlessLobster.Web.csproj", "{CB44FDCE-9674-4DF9-A95F-B1557767E2E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessLobster.Tests", "EndlessLobster.Tests\EndlessLobster.Tests.csproj", "{F2413320-424B-466B-ADCB-F3C60ADAB774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessLobster.Domain", "EndlessLobster.Domain\EndlessLobster.Domain.csproj", "{C25E255D-C0E2-4862-9122-8A5021AE8D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessLobster.Repository", "EndlessLobster.Repository\EndlessLobster.Repository.csproj", "{73FC59E1-B2C9-4231-93E7-62CCF6B0B5E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndlessLobster.Api", "EndlessLobster.Api\EndlessLobster.Api.csproj", "{9825B467-53A2-4537-9657-194439845014}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB44FDCE-9674-4DF9-A95F-B1557767E2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB44FDCE-9674-4DF9-A95F-B1557767E2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB44FDCE-9674-4DF9-A95F-B1557767E2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB44FDCE-9674-4DF9-A95F-B1557767E2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2413320-424B-466B-ADCB-F3C60ADAB774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2413320-424B-466B-ADCB-F3C60ADAB774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2413320-424B-466B-ADCB-F3C60ADAB774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2413320-424B-466B-ADCB-F3C60ADAB774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C25E255D-C0E2-4862-9122-8A5021AE8D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C25E255D-C0E2-4862-9122-8A5021AE8D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C25E255D-C0E2-4862-9122-8A5021AE8D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C25E255D-C0E2-4862-9122-8A5021AE8D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FC59E1-B2C9-4231-93E7-62CCF6B0B5E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FC59E1-B2C9-4231-93E7-62CCF6B0B5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FC59E1-B2C9-4231-93E7-62CCF6B0B5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FC59E1-B2C9-4231-93E7-62CCF6B0B5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9825B467-53A2-4537-9657-194439845014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9825B467-53A2-4537-9657-194439845014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9825B467-53A2-4537-9657-194439845014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9825B467-53A2-4537-9657-194439845014}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D7ED980-E004-48C4-A2C6-1BC221F2DA59}
+	EndGlobalSection
+EndGlobal
