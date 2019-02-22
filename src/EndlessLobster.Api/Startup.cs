@@ -79,7 +79,7 @@ namespace EndlessLobster.Api
 		}
 	}
 
-	public static class PackageExtention
+	public static class ContainerExtention
 	{
 		public static void RegisterSimilarTo<T>(this Container container, string theNamespace, string matchEnd)
 		{
