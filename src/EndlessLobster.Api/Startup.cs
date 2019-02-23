@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using EndlessLobster.Domain;
+using EndlessLobster.Domain.Models;
 using EndlessLobster.Domain.Services;
 using EndlessLobster.Repository;
 using MediatR;
@@ -71,7 +72,7 @@ namespace EndlessLobster.Api
 			_container.RegisterMvcViewComponents(app);
 
 			// Add application services. For instance:
-			_container.RegisterSimilarTo<CustomerHistoryRepository>("EndlessLobster.Repository", "Repository");
+			_container.RegisterSimilarTo<CustomerRepository>("EndlessLobster.Repository", "Repository");
 			_container.RegisterSimilarTo<OrderService>("EndlessLobster.Domain.Services", "Service");
 			_container.Register<ILog, Log>();
 

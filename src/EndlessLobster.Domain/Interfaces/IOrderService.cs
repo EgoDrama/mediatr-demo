@@ -1,8 +1,12 @@
-﻿namespace EndlessLobster.Domain
+﻿using System.Collections.Generic;
+using EndlessLobster.Domain.Models;
+
+namespace EndlessLobster.Domain
 {
 	public interface IOrderService
 	{
-		string GetOrder(int id);
-		void SaveOrder(string order);
+		IEnumerable<Order> Get();
+		Order Get(int id);
+		void Save(Order order);
 	}
 }

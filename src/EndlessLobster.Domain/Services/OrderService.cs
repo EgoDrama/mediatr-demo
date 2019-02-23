@@ -1,15 +1,24 @@
-﻿namespace EndlessLobster.Domain.Services
+﻿using System;
+using System.Collections.Generic;
+using EndlessLobster.Domain.Models;
+
+namespace EndlessLobster.Domain.Services
 {
 	public class OrderService : IOrderService
 	{
-		public string GetOrder(int id)
+		public IEnumerable<Order> Get()
 		{
-			return $"my order with id {id}";
+			throw new NotImplementedException();
 		}
 
-		public void SaveOrder(string order)
+		public Order Get(int id)
 		{
-			// save
+			throw new NotImplementedException();
+		}
+
+		public void Save(Order order)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
