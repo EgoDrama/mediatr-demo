@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EndlessLobster.Api.Models;
 using EndlessLobster.Domain;
 using EndlessLobster.Domain.Customer;
+using EndlessLobster.Domain.Customer.Commands;
 using EndlessLobster.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

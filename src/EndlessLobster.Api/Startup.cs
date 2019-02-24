@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 using EndlessLobster.Domain;
+using EndlessLobster.Domain.Customer;
 using EndlessLobster.Domain.Models;
 using EndlessLobster.Domain.Services;
 using EndlessLobster.Repository;
@@ -35,6 +36,12 @@ namespace EndlessLobster.Api
 		{
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			IntegrateSimpleInjector(services);
+			services.AddMediatR(typeof(Customer).GetTypeInfo().Assembly);
+
+			services.AddMediatR(typeof(IRequestHandler<,>));
+			services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
+			services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
+			services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
 		}
 
 		private void IntegrateSimpleInjector(IServiceCollection services)
@@ -50,8 +57,6 @@ namespace EndlessLobster.Api
 
 			services.EnableSimpleInjectorCrossWiring(_container);
 			services.UseSimpleInjectorAspNetRequestScoping(_container);
-
-			services.AddMediatR(typeof(Customer).GetTypeInfo().Assembly);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +85,8 @@ namespace EndlessLobster.Api
 
 			// Allow Simple Injector to resolve services from ASP.NET Core.
 			_container.AutoCrossWireAspNetComponents(app);
+
+			_container.Verify();
 		}
 	}
 

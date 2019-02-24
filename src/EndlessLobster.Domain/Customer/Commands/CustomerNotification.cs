@@ -2,7 +2,7 @@
 using EndlessLobster.Domain.Models;
 using MediatR;
 
-namespace EndlessLobster.Domain.Customer
+namespace EndlessLobster.Domain.Customer.Commands
 {
 	public class CustomerNotification : INotification
 	{
