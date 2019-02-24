@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EndlessLobster.Domain.Customer.Commands;
@@ -18,9 +19,12 @@ namespace EndlessLobster.Domain.Customer
 
 		public Task<List<Models.Customer>> Handle(CustomersRequest request, CancellationToken cancellationToken)
 		{
-			var customers = _customerRepository.Get();
+			var customersDto = _customerRepository.Get();
 
-			return Task.FromResult(new List<Models.Customer>());
+			var customers = customersDto.Select(c => new Models.Customer(c.Name,
+				c.Orders.Select(o => new Models.Order(o.Name, o.Products.Select(p => new Models.Product(p.Name)))))).ToList();
+
+			return Task.FromResult(customers);
 		}
 	}
 }

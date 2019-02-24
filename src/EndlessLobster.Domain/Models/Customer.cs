@@ -4,11 +4,9 @@ namespace EndlessLobster.Domain.Models
 {
 	public class Customer
 	{
-		private readonly int _id = 1;
-
 		public Customer(string name, IEnumerable<Order> orders)
 		{
-			Id = _id++;
+			Id++;
 			Name = name;
 			Orders = orders;
 		}
