@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EndlessLobster.Api.Models;
 using EndlessLobster.Domain;
+using EndlessLobster.Domain.Models;
 using EndlessLobster.Repository;
+using EndlessLobster.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndlessLobster.Api.Controllers
@@ -42,19 +45,73 @@ namespace EndlessLobster.Api.Controllers
 		[HttpGet("customers")]
 		public ActionResult<IEnumerable<CustomerViewModel>> GetCustomers()
 		{
-			throw new NotImplementedException();
+			var customers = _customerRepository.Get();
+
+			return MapCustomers(customers);
+		}
+
+		private static CustomerViewModel[] MapCustomers(IEnumerable<CustomerDto> customers)
+		{
+			return customers.Select(c => new CustomerViewModel
+			{
+				Id = c.Id,
+				Name = c.Name,
+				Orders = c.Orders.Select(o => new OrderViewModel
+				{
+					Id = o.Id,
+					Name = o.Name,
+					Products = o.Products.Select(p => new ProductViewModel
+					{
+						Id = p.Id,
+						Name = p.Name
+					})
+				})}).ToArray();
 		}
 
 		[HttpGet("customers/{id}")]
 		public ActionResult<CustomerViewModel> GetCustomer(int id)
 		{
-			throw new NotImplementedException();
+			var customer = _customerRepository.Get(id);
+
+			return MapCustomer(customer);
+		}
+
+		private static CustomerViewModel MapCustomer(CustomerDto customer)
+		{
+			return new CustomerViewModel
+			{
+				Id = customer.Id,
+				Name = customer.Name,
+				Orders = customer.Orders.Select(o => new OrderViewModel
+				{
+					Id = o.Id,
+					Name = o.Name,
+					Products = o.Products.Select(p => new ProductViewModel
+					{
+						Id = p.Id,
+						Name = p.Name
+					})
+				})};
 		}
 
 		[HttpPost("customers")]
 		public void CreateCustomer([FromBody] CustomerViewModel value)
 		{
-			throw new NotImplementedException();
+			IList<Order> orders = new List<Order>();
+			IList<Product> products = new List<Product>();
+
+			foreach (var order in value.Orders)
+			{
+				foreach (var product in order.Products)
+				{
+					products.Add(new Product(product.Name));
+				}
+				orders.Add(new Order(order.Name, products));
+			}
+
+			var customer = new Customer(value.Name, orders);
+
+			_customerService.Save(customer);
 		}
 
 		[HttpGet("products")]
