@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 using EndlessLobster.Domain;
 using EndlessLobster.Domain.Models;
 using EndlessLobster.Domain.Services;
@@ -34,7 +35,7 @@ namespace EndlessLobster.Api
 		{
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			IntegrateSimpleInjector(services);
-			services.AddMediatR();
+			services.AddMediatR(typeof(Customer).GetTypeInfo().Assembly);
 		}
 
 		private void IntegrateSimpleInjector(IServiceCollection services)
