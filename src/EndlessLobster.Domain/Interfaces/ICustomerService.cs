@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using EndlessLobster.Domain.Models;
 
 namespace EndlessLobster.Domain
 {
 	public interface ICustomerService
 	{
-		IEnumerable<Customer> Get();
-		Customer Get(int id);
-		void Save(Customer customer);
+		IEnumerable<Models.Customer> Get();
+		Models.Customer Get(int id);
+		void Save(Models.Customer customer);
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using EndlessLobster.Domain.Models;
 using EndlessLobster.Repository;
 using EndlessLobster.Repository.Models;
 
@@ -14,17 +13,17 @@ namespace EndlessLobster.Domain.Services
 			_customerRepository = customerRepository;
 		}
 
-		public IEnumerable<Customer> Get()
+		public IEnumerable<Models.Customer> Get()
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public Customer Get(int id)
+		public Models.Customer Get(int id)
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public void Save(Customer customer)
+		public void Save(Models.Customer customer)
 		{
 			var ordersDto = new List<OrderDto>();
 			var productsDto = new List<ProductDto>();

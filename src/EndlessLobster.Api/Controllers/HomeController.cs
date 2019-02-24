@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EndlessLobster.Api.Models;
 using EndlessLobster.Domain;
+using EndlessLobster.Domain.Customer;
 using EndlessLobster.Domain.Models;
-using EndlessLobster.Repository;
-using EndlessLobster.Repository.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EndlessLobster.Api.Controllers
@@ -14,43 +15,41 @@ namespace EndlessLobster.Api.Controllers
 	[ApiController]
 	public class HomeController : ControllerBase
 	{
-		private readonly ICustomerRepository _customerRepository;
-		private readonly IProductRepository _productRespoitory;
-		private readonly IOrderRepository _orderRepository;
-
-		private readonly ICustomerService _customerService;
-		private readonly IProductService _productService;
-		private readonly IOrderService _orderService;
-
+		private readonly IMediator _mediator;
 		private readonly ILog _logger;
 
 		public HomeController(
-			ICustomerRepository customerRepository,
-			IProductRepository productRespoitory,
-			IOrderRepository orderRepository,
-			ICustomerService customerService,
-			IProductService productService,
-			IOrderService orderService,
+			IMediator mediator,
 			ILog logger)
 		{
-			_customerRepository = customerRepository;
-			_productRespoitory = productRespoitory;
-			_orderRepository = orderRepository;
-			_customerService = customerService;
-			_productService = productService;
-			_orderService = orderService;
+			_mediator = mediator;
 			_logger = logger;
 		}
 
 		[HttpGet("customers")]
-		public ActionResult<IEnumerable<CustomerViewModel>> GetCustomers()
+		public async Task<ActionResult<List<CustomerViewModel>>> GetCustomers()
 		{
-			var customers = _customerRepository.Get();
+			var response = await _mediator.Send(new CustomersRequest());
 
-			return MapCustomers(customers);
+			return MapCustomers(response);
 		}
 
-		private static CustomerViewModel[] MapCustomers(IEnumerable<CustomerDto> customers)
+		[HttpGet("customers/{id}")]
+		public async Task<ActionResult<CustomerViewModel>> GetCustomer(int id)
+		{
+
+			var response = await _mediator.Send(new CustomerRequest(id));
+
+			return MapCustomer(response);
+		}
+
+		[HttpPost("customers")]
+		public async Task CreateCustomer([FromBody] CustomerViewModel value)
+		{
+			await _mediator.Publish(new CustomerNotification(value.Name));
+		}
+
+		private static List<CustomerViewModel> MapCustomers(IEnumerable<Customer> customers)
 		{
 			return customers.Select(c => new CustomerViewModel
 			{
@@ -65,18 +64,11 @@ namespace EndlessLobster.Api.Controllers
 						Id = p.Id,
 						Name = p.Name
 					})
-				})}).ToArray();
+				})
+			}).ToList();
 		}
 
-		[HttpGet("customers/{id}")]
-		public ActionResult<CustomerViewModel> GetCustomer(int id)
-		{
-			var customer = _customerRepository.Get(id);
-
-			return MapCustomer(customer);
-		}
-
-		private static CustomerViewModel MapCustomer(CustomerDto customer)
+		private static CustomerViewModel MapCustomer(Customer customer)
 		{
 			return new CustomerViewModel
 			{
@@ -91,27 +83,8 @@ namespace EndlessLobster.Api.Controllers
 						Id = p.Id,
 						Name = p.Name
 					})
-				})};
-		}
-
-		[HttpPost("customers")]
-		public void CreateCustomer([FromBody] CustomerViewModel value)
-		{
-			IList<Order> orders = new List<Order>();
-			IList<Product> products = new List<Product>();
-
-			foreach (var order in value.Orders)
-			{
-				foreach (var product in order.Products)
-				{
-					products.Add(new Product(product.Name));
-				}
-				orders.Add(new Order(order.Name, products));
-			}
-
-			var customer = new Customer(value.Name, orders);
-
-			_customerService.Save(customer);
+				})
+			};
 		}
 
 		[HttpGet("products")]
